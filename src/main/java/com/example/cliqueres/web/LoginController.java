@@ -24,7 +24,7 @@ public class LoginController {
   }
 
   @PostMapping
-  public String login(HttpServletRequest request, Model model) {
+  public String login(HttpServletRequest request, Model model) throws InterruptedException {
     try {
       if (authService.checkUser(request.getParameter("username"),
           request.getParameter("password"))) {
@@ -34,6 +34,7 @@ public class LoginController {
     } catch (UserDoesNotExistException exception) {
       model.addAttribute("hasError", true);
       model.addAttribute("error", exception.getMessage());
+      Thread.sleep(3000);
       return "login";
     }
   }

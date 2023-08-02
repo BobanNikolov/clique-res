@@ -1,8 +1,9 @@
 package com.example.cliqueres.service;
 
-import com.example.cliqueres.domain.Importance;
+import com.example.cliqueres.domain.User;
+import com.example.cliqueres.domain.enums.Importance;
 import com.example.cliqueres.domain.Reservation;
-import com.example.cliqueres.domain.Type;
+import com.example.cliqueres.domain.enums.Type;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface ReservationService {
 
   List<Reservation> findByDate(LocalDate date);
 
-  List<Reservation> findByReservedBy(String reservedBy);
+  List<Reservation> findByReservedBy(User user);
 
   List<Reservation> findByDateAndImportance(LocalDate date, Importance importance);
 

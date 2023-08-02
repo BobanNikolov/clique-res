@@ -1,15 +1,18 @@
 package com.example.cliqueres.service.impl;
 
-import com.example.cliqueres.domain.Importance;
+import com.example.cliqueres.domain.User;
+import com.example.cliqueres.domain.enums.Importance;
 import com.example.cliqueres.domain.Reservation;
-import com.example.cliqueres.domain.Type;
+import com.example.cliqueres.domain.enums.Type;
 import com.example.cliqueres.repository.ReservationRepository;
 import com.example.cliqueres.service.ReservationService;
-import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -40,8 +43,8 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public List<Reservation> findByReservedBy(String reservedBy) {
-    return repository.findAllByReservedBy(reservedBy);
+  public List<Reservation> findByReservedBy(User user) {
+    return repository.findAllByUserEquals(user);
   }
 
   @Override
