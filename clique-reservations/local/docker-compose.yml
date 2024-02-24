@@ -1,0 +1,9 @@
+services:
+  cr-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cr
+      POSTGRES_PASSWORD: cr
+      POSTGRES_DB: cr
+    ports:
+      - 5432:5432
