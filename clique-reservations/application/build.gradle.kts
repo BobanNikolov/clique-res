@@ -37,17 +37,12 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     implementation("org.springframework.boot:spring-boot-autoconfigure")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-json")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-properties-migrator")
-
-    implementation("org.springframework.security:spring-security-oauth2-jose")
-    implementation("org.springframework.security:spring-security-oauth2-resource-server")
-    implementation("org.springframework.security:spring-security-config")
 
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
@@ -88,7 +83,6 @@ configure<SpringBootExtension> {
 
 dependencies {
     implementation(project(mapOf("path" to ":service")))
-    testImplementation("org.springframework.security:spring-security-test")
 }
 
 // *********************************************************************************************************************

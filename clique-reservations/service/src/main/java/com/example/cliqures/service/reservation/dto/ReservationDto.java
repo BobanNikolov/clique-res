@@ -1,4 +1,4 @@
-package com.example.cliqures.service.reservation;
+package com.example.cliqures.service.reservation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReservationDto {
-    private Long id;
-    private String nameReservation;
-    private Long numOfPeople;
-    private Long numOfTables;
-    private Long createdBy;
-    private Long event;
+  private Long id;
+  private String nameReservation;
+  private Long numOfPeople;
+  private Long numOfTables;
+  private Long createdBy;
+  private Long event;
 }

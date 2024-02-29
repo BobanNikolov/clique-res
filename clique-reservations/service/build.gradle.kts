@@ -33,8 +33,6 @@ dependencies {
 
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
-    implementation("org.springframework.security:spring-security-core")
-
     implementation("org.aspectj:aspectjweaver")
 
     implementation("org.apache.commons:commons-lang3")

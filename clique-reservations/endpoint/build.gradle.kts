@@ -40,7 +40,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springdoc:springdoc-openapi-starter-common:${project.properties["springdocVersion"]}")
-    implementation("org.springframework.security:spring-security-core")
 
     implementation("com.innoventsolutions.birt-spring-boot:birt-spring-boot-starter:0.0.7")
 
@@ -53,9 +52,6 @@ dependencies {
 // *********************************************************************************************************************
 // TEST
 
-dependencies {
-    testImplementation("org.springframework.security:spring-security-test")
-}
 
 // *********************************************************************************************************************
 // BUILD
