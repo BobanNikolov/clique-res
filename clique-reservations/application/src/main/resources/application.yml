@@ -31,3 +31,5 @@ spring:
     serialization:
       write-dates-as-timestamps: false
     default-property-inclusion: always
+server:
+  port: 8080

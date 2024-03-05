@@ -17,6 +17,8 @@ dependencyManagement {
 dependencies {
     api(project(":model"))
 
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
     implementation("org.slf4j:slf4j-api")
 
     implementation("org.springframework.boot:spring-boot")
@@ -32,8 +34,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-graphql")
 
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-
-    implementation("org.springframework.security:spring-security-core")
 
     implementation("org.aspectj:aspectjweaver")
 
