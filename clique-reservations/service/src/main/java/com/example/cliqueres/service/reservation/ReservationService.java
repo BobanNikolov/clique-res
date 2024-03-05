@@ -1,7 +1,7 @@
-package com.example.cliqures.service.reservation;
+package com.example.cliqueres.service.reservation;
 
-import com.example.cliqures.service.reservation.dto.ReservationDto;
-import com.example.cliqures.service.reservation.dto.ReservationPersistCommand;
+import com.example.cliqueres.service.reservation.dto.ReservationDto;
+import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
 
 public interface ReservationService {
   ReservationDto save(ReservationPersistCommand reservation);

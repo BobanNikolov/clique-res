@@ -1,4 +1,4 @@
-package com.example.cliqures.service.reservation.dto;
+package com.example.cliqueres.service.reservation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

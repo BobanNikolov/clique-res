@@ -1,4 +1,4 @@
-package com.example.cliqures.service.validator;
+package com.example.cliqueres.service.validator;
 
 public interface ModificationValidationGroup {
 }

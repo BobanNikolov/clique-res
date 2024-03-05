@@ -32,6 +32,4 @@ spring:
       write-dates-as-timestamps: false
     default-property-inclusion: always
 server:
-  servlet:
-    context-path: /api
   port: 8080

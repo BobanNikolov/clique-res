@@ -17,6 +17,8 @@ dependencyManagement {
 dependencies {
     api(project(":model"))
 
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
     implementation("org.slf4j:slf4j-api")
 
     implementation("org.springframework.boot:spring-boot")

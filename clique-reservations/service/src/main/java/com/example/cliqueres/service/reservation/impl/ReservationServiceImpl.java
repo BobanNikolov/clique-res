@@ -1,11 +1,11 @@
-package com.example.cliqures.service.reservation.impl;
+package com.example.cliqueres.service.reservation.impl;
 
 import com.example.cliqueres.domain.Reservation;
 import com.example.cliqueres.repository.ReservationRepository;
-import com.example.cliqures.service.reservation.ReservationService;
-import com.example.cliqures.service.reservation.dto.ReservationDto;
-import com.example.cliqures.service.reservation.dto.ReservationPersistCommand;
-import com.example.cliqures.service.validator.ModificationValidationGroup;
+import com.example.cliqueres.service.reservation.ReservationService;
+import com.example.cliqueres.service.reservation.dto.ReservationDto;
+import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
+import com.example.cliqueres.service.validator.ModificationValidationGroup;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;

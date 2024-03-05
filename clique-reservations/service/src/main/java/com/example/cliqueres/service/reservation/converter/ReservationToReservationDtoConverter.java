@@ -1,7 +1,7 @@
-package com.example.cliqures.service.reservation.converter;
+package com.example.cliqueres.service.reservation.converter;
 
 import com.example.cliqueres.domain.Reservation;
-import com.example.cliqures.service.reservation.dto.ReservationDto;
+import com.example.cliqueres.service.reservation.dto.ReservationDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
