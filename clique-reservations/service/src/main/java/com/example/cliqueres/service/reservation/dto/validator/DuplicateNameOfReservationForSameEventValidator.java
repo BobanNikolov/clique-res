@@ -13,7 +13,7 @@ public class DuplicateNameOfReservationForSameEventValidator
 
   @Override
   public boolean isValid(final ReservationPersistCommand value, final ConstraintValidatorContext context) {
-    return repository.countReservationsByNameReservationEqualsIgnoreCaseAndEvent(value.getNameReservation(),
-        value.getEvent()) == 0;
+    return repository.countReservationsByNameReservationEqualsIgnoreCaseAndEventId(value.getNameReservation(),
+        value.getEventId()) == 0;
   }
 }

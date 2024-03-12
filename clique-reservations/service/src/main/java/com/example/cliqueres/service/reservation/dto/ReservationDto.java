@@ -17,5 +17,5 @@ public class ReservationDto {
   private Long numOfPeople;
   private Long numOfTables;
   private Long createdBy;
-  private Long event;
+  private Long eventId;
 }

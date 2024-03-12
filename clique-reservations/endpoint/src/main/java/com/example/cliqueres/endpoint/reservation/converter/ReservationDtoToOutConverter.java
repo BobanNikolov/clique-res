@@ -9,13 +9,16 @@ import org.springframework.stereotype.Component;
 public class ReservationDtoToOutConverter implements Converter<ReservationDto, ReservationOut> {
   @Override
   public ReservationOut convert(ReservationDto source) {
+    if (source == null) {
+      return null;
+    }
     final ReservationOut reservationOut = new ReservationOut();
     reservationOut.setId(source.getId());
     reservationOut.setNameReservation(source.getNameReservation());
     reservationOut.setNumOfPeople(source.getNumOfPeople());
     reservationOut.setNumOfTables(source.getNumOfTables());
     reservationOut.setCreatedBy(source.getCreatedBy());
-    reservationOut.setEvent(source.getEvent());
+    reservationOut.setEventId(source.getEventId());
     return reservationOut;
   }
 }

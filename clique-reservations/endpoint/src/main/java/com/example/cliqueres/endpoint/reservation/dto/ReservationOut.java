@@ -15,5 +15,5 @@ public class ReservationOut {
   private Long numOfPeople;
   private Long numOfTables;
   private Long createdBy;
-  private Long event;
+  private Long eventId;
 }
