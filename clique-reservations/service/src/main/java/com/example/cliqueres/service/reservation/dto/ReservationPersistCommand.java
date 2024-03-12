@@ -23,5 +23,5 @@ public class ReservationPersistCommand {
   @NotNull
   private Long createdBy;
   @NotNull
-  private Long event;
+  private Long eventId;
 }

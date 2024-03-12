@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-  Long countReservationsByNameReservationEqualsIgnoreCaseAndEvent(String nameOfReservation, Long eventId);
+  Long countReservationsByNameReservationEqualsIgnoreCaseAndEventId(String nameOfReservation, Long eventId);
 }

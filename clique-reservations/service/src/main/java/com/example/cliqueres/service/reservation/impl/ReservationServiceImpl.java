@@ -1,5 +1,6 @@
 package com.example.cliqueres.service.reservation.impl;
 
+import com.example.cliqueres.domain.Event;
 import com.example.cliqueres.domain.Reservation;
 import com.example.cliqueres.repository.ReservationRepository;
 import com.example.cliqueres.service.reservation.ReservationService;
@@ -60,17 +61,23 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   private Reservation convert(ReservationPersistCommand reservationPersistCommand) {
+    if (reservationPersistCommand == null) {
+      return null;
+    }
     final var reservation = new Reservation();
     reservation.setId(reservationPersistCommand.getId());
     reservation.setNameReservation(reservationPersistCommand.getNameReservation());
     reservation.setNumOfTables(reservationPersistCommand.getNumOfTables());
     reservation.setNumOfPeople(reservationPersistCommand.getNumOfPeople());
-    reservation.setEvent(reservationPersistCommand.getEvent());
+    reservation.setEvent(Event.builder().id(reservationPersistCommand.getEventId()).build());
     reservation.setCreatedBy(reservationPersistCommand.getCreatedBy());
     return reservation;
   }
 
   private Reservation merge(Reservation reservationToUpdate, Reservation reservation) {
+    if (reservation == null) {
+      return null;
+    }
     reservationToUpdate.setId(reservation.getId());
     reservationToUpdate.setNameReservation(reservation.getNameReservation());
     reservationToUpdate.setNumOfTables(reservation.getNumOfTables());
