@@ -1,8 +1,11 @@
 package com.example.cliqueres.domain;
 
 
+import com.example.cliqueres.domain.enums.ReservationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,4 +47,11 @@ public class Reservation {
     @JoinColumn(name = "event_id")
     @ManyToOne
     private Event event;
+
+    @Column(name = "reservation_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ReservationType reservationType;
+
+    @Column(name = "price_of_reservation")
+    private Long priceOfReservation;
 }

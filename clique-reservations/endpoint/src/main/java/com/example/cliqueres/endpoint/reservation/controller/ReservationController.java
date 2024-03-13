@@ -1,5 +1,6 @@
 package com.example.cliqueres.endpoint.reservation.controller;
 
+import com.example.cliqueres.domain.enums.ReservationType;
 import com.example.cliqueres.endpoint.reservation.dto.ReservationOut;
 import com.example.cliqueres.service.reservation.ReservationService;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
@@ -46,6 +50,16 @@ public class ReservationController {
   public ResponseEntity<ReservationOut> getById(@PathVariable(name = "id") Long id) {
     var result = this.reservationService.getById(id);
     final var convertedResult = this.conversionService.convert(result, ReservationOut.class);
+    return ResponseEntity.ok(convertedResult);
+  }
+
+  @PostMapping("/get-by-reservation-types")
+  public ResponseEntity<List<ReservationOut>> getByReservationTypes(@RequestBody List<String> reservationTypes) {
+    var result = this.reservationService.getAllByReservationTypes(reservationTypes);
+    final var convertedResult = result.stream()
+        .map(it -> conversionService.convert(it, ReservationOut.class))
+        .filter(Objects::nonNull)
+        .toList();
     return ResponseEntity.ok(convertedResult);
   }
 

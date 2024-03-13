@@ -2,12 +2,14 @@ package com.example.cliqueres.service.reservation.impl;
 
 import com.example.cliqueres.domain.Event;
 import com.example.cliqueres.domain.Reservation;
+import com.example.cliqueres.domain.enums.ReservationType;
 import com.example.cliqueres.repository.ReservationRepository;
 import com.example.cliqueres.service.reservation.ReservationService;
 import com.example.cliqueres.service.reservation.dto.ReservationDto;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
 import com.example.cliqueres.service.validator.ModificationValidationGroup;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,11 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -60,6 +66,20 @@ public class ReservationServiceImpl implements ReservationService {
     return true;
   }
 
+  @Override
+  public List<ReservationDto> getAllByReservationTypes(List<String> reservationTypes) {
+    var values = Arrays.stream(ReservationType.values()).map(ReservationType::name).collect(Collectors.toSet());
+    if (!values.containsAll(reservationTypes)) {
+      throw new ValidationException("Reservation types values are not correct!");
+    }
+    final var reservationTypesAsEnums = reservationTypes.stream().map(ReservationType::valueOf).toList();
+    final var result = repository.findAllByReservationTypeIn(reservationTypesAsEnums);
+    return result.stream()
+        .map(it -> conversionService.convert(it, ReservationDto.class))
+        .filter(Objects::nonNull)
+        .toList();
+  }
+
   private Reservation convert(ReservationPersistCommand reservationPersistCommand) {
     if (reservationPersistCommand == null) {
       return null;
@@ -71,6 +91,8 @@ public class ReservationServiceImpl implements ReservationService {
     reservation.setNumOfPeople(reservationPersistCommand.getNumOfPeople());
     reservation.setEvent(Event.builder().id(reservationPersistCommand.getEventId()).build());
     reservation.setCreatedBy(reservationPersistCommand.getCreatedBy());
+    reservation.setReservationType(reservationPersistCommand.getReservationType());
+    reservation.setPriceOfReservation(reservationPersistCommand.getPriceOfReservation());
     return reservation;
   }
 
@@ -84,6 +106,8 @@ public class ReservationServiceImpl implements ReservationService {
     reservationToUpdate.setNumOfPeople(reservation.getNumOfPeople());
     reservationToUpdate.setEvent(reservation.getEvent());
     reservationToUpdate.setCreatedBy(reservation.getCreatedBy());
+    reservationToUpdate.setReservationType(reservation.getReservationType());
+    reservationToUpdate.setPriceOfReservation(reservation.getPriceOfReservation());
 
     return reservationToUpdate;
   }
