@@ -1,5 +1,6 @@
 package com.example.cliqueres.service.reservation.dto;
 
+import com.example.cliqueres.domain.enums.ReservationType;
 import com.example.cliqueres.service.reservation.dto.validator.DuplicateNameOfReservationForSameEventValidation;
 import com.example.cliqueres.service.validator.ModificationValidationGroup;
 import jakarta.validation.constraints.NotNull;
@@ -24,4 +25,7 @@ public class ReservationPersistCommand {
   private Long createdBy;
   @NotNull
   private Long eventId;
+  @NotNull
+  private ReservationType reservationType;
+  private Long priceOfReservation;
 }

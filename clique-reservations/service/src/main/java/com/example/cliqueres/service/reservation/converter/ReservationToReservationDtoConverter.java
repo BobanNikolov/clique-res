@@ -21,6 +21,8 @@ public class ReservationToReservationDtoConverter implements Converter<Reservati
     reservationDto.setNumOfTables(source.getNumOfTables());
     reservationDto.setCreatedBy(source.getCreatedBy());
     reservationDto.setEventId(source.getEvent() != null ? source.getEvent().getId() : null);
+    reservationDto.setReservationType(source.getReservationType());
+    reservationDto.setPriceOfReservation(source.getPriceOfReservation());
     return reservationDto;
   }
 }

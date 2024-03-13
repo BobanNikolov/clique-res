@@ -19,6 +19,8 @@ public class ReservationDtoToOutConverter implements Converter<ReservationDto, R
     reservationOut.setNumOfTables(source.getNumOfTables());
     reservationOut.setCreatedBy(source.getCreatedBy());
     reservationOut.setEventId(source.getEventId());
+    reservationOut.setReservationType(source.getReservationType());
+    reservationOut.setPriceOfReservation(source.getPriceOfReservation());
     return reservationOut;
   }
 }

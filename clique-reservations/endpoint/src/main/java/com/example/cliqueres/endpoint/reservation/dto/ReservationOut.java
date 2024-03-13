@@ -1,5 +1,6 @@
 package com.example.cliqueres.endpoint.reservation.dto;
 
+import com.example.cliqueres.domain.enums.ReservationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,6 @@ public class ReservationOut {
   private Long numOfTables;
   private Long createdBy;
   private Long eventId;
+  private ReservationType reservationType;
+  private Long priceOfReservation;
 }
