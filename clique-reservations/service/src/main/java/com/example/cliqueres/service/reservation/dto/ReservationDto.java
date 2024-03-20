@@ -1,6 +1,7 @@
 package com.example.cliqueres.service.reservation.dto;
 
 import com.example.cliqueres.domain.enums.ReservationType;
+import com.example.cliqueres.service.user.dto.UserAccountDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class ReservationDto {
   private String nameReservation;
   private Long numOfPeople;
   private Long numOfTables;
-  private Long createdBy;
+  private UserAccountDto createdBy;
   private Long eventId;
   private ReservationType reservationType;
   private Long priceOfReservation;

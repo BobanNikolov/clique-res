@@ -4,10 +4,12 @@ import com.example.cliqueres.domain.Event;
 import com.example.cliqueres.domain.Reservation;
 import com.example.cliqueres.domain.enums.ReservationType;
 import com.example.cliqueres.repository.ReservationRepository;
+import com.example.cliqueres.repository.UserAccountRepository;
 import com.example.cliqueres.service.reservation.ReservationService;
 import com.example.cliqueres.service.reservation.dto.ReservationDto;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
 import com.example.cliqueres.service.validator.ModificationValidationGroup;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
@@ -20,8 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 @Service
 @Transactional
@@ -29,6 +32,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
   private final ReservationRepository repository;
+  private final UserAccountRepository userAccountRepository;
   private final Validator validator;
   private final ConversionService conversionService;
 
@@ -49,9 +53,12 @@ public class ReservationServiceImpl implements ReservationService {
     if (!constrainViolations.isEmpty()) {
       throw new ConstraintViolationException("Reservation(UPDATE) failed validation!", constrainViolations);
     }
-    final var reservationToUpdate = repository.getReferenceById(reservation.getId());
+    final var reservationToUpdate = repository.findById(reservation.getId());
+    if (reservationToUpdate.isEmpty()) {
+      throw new EntityNotFoundException(format("There is no reservation with id : %d", reservation.getId()));
+    }
     final var reservationWithUpdateInfo = convert(reservation);
-    final var result = repository.saveAndFlush(merge(reservationToUpdate, reservationWithUpdateInfo));
+    final var result = repository.saveAndFlush(merge(reservationToUpdate.get(), reservationWithUpdateInfo));
     return conversionService.convert(result, ReservationDto.class);
   }
 
@@ -90,7 +97,11 @@ public class ReservationServiceImpl implements ReservationService {
     reservation.setNumOfTables(reservationPersistCommand.getNumOfTables());
     reservation.setNumOfPeople(reservationPersistCommand.getNumOfPeople());
     reservation.setEvent(Event.builder().id(reservationPersistCommand.getEventId()).build());
-    reservation.setCreatedBy(reservationPersistCommand.getCreatedBy());
+    final var createdBy = userAccountRepository.findById(reservationPersistCommand.getCreatedBy());
+    if (createdBy.isEmpty()) {
+      throw new EntityNotFoundException(format("There is no user with id : %d", reservationPersistCommand.getCreatedBy()));
+    }
+    reservation.setCreatedBy(createdBy.get());
     reservation.setReservationType(reservationPersistCommand.getReservationType());
     reservation.setPriceOfReservation(reservationPersistCommand.getPriceOfReservation());
     return reservation;
@@ -105,7 +116,6 @@ public class ReservationServiceImpl implements ReservationService {
     reservationToUpdate.setNumOfTables(reservation.getNumOfTables());
     reservationToUpdate.setNumOfPeople(reservation.getNumOfPeople());
     reservationToUpdate.setEvent(reservation.getEvent());
-    reservationToUpdate.setCreatedBy(reservation.getCreatedBy());
     reservationToUpdate.setReservationType(reservation.getReservationType());
     reservationToUpdate.setPriceOfReservation(reservation.getPriceOfReservation());
 
