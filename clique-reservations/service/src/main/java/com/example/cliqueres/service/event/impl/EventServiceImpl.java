@@ -6,6 +6,7 @@ import com.example.cliqueres.service.event.EventService;
 import com.example.cliqueres.service.event.dto.EventDto;
 import com.example.cliqueres.service.event.dto.EventPersistCommand;
 import com.example.cliqueres.service.validator.ModificationValidationGroup;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.example.cliqueres.service.util.DateAdjuster.fromStringToLocalDate;
+import static java.lang.String.format;
 
 @Service
 @Transactional
@@ -42,9 +44,12 @@ public class EventServiceImpl implements EventService {
     if (!constrainViolations.isEmpty()) {
       throw new ConstraintViolationException("Event(UPDATE) failed validation!", constrainViolations);
     }
-    final var eventToUpdate = repository.getReferenceById(event.getId());
+    final var eventToUpdate = repository.findById(event.getId());
+    if (eventToUpdate.isEmpty()) {
+      throw new EntityNotFoundException(format("There is no event with id : %d", event.getId()));
+    }
     final var eventWithUpdateInfo = convert(event);
-    final var result = repository.saveAndFlush(merge(eventToUpdate, eventWithUpdateInfo));
+    final var result = repository.saveAndFlush(merge(eventToUpdate.get(), eventWithUpdateInfo));
     return conversionService.convert(result, EventDto.class);
   }
 

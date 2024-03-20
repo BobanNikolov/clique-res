@@ -1,6 +1,5 @@
 package com.example.cliqueres.endpoint.reservation.controller;
 
-import com.example.cliqueres.domain.enums.ReservationType;
 import com.example.cliqueres.endpoint.reservation.dto.ReservationOut;
 import com.example.cliqueres.service.reservation.ReservationService;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;

@@ -41,8 +41,9 @@ public class Reservation {
     @Column(name = "num_of_tables", nullable = false)
     private Long numOfTables;
 
-    @Column(name = "created_by")
-    private Long createdBy;
+    @JoinColumn(name = "created_by_id")
+    @ManyToOne
+    private UserAccount createdBy;
 
     @JoinColumn(name = "event_id")
     @ManyToOne
