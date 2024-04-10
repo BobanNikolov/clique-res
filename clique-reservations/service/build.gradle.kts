@@ -32,8 +32,14 @@ dependencies {
     implementation("org.springframework:spring-context-support")
     implementation("org.hibernate.validator:hibernate-validator")
     implementation("org.springframework.boot:spring-boot-starter-graphql")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
+
+
 
     implementation("org.aspectj:aspectjweaver")
 
