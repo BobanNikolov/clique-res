@@ -1,8 +1,7 @@
 package com.example.cliqueres.service.user.impl;
 
 import com.example.cliqueres.domain.UserAccount;
-import com.example.cliqueres.repository.UserAccountRepository;
-import com.example.cliqueres.service.reservation.dto.ReservationDto;
+import com.example.cliqueres.repository.useraccount.UserAccountRepository;
 import com.example.cliqueres.service.user.UserAccountService;
 import com.example.cliqueres.service.user.dto.UserAccountDto;
 import com.example.cliqueres.service.user.dto.UserAccountPersistCommand;

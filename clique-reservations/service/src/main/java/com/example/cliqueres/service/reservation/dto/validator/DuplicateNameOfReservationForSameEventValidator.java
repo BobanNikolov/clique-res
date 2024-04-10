@@ -1,6 +1,6 @@
 package com.example.cliqueres.service.reservation.dto.validator;
 
-import com.example.cliqueres.repository.ReservationRepository;
+import com.example.cliqueres.repository.reservation.ReservationRepository;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
