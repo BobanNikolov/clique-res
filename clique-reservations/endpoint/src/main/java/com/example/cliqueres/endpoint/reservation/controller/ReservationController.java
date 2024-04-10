@@ -1,8 +1,12 @@
 package com.example.cliqueres.endpoint.reservation.controller;
 
+import com.example.cliqueres.endpoint.dto.PageResponse;
+import com.example.cliqueres.endpoint.event.dto.EventOut;
 import com.example.cliqueres.endpoint.reservation.dto.ReservationOut;
+import com.example.cliqueres.service.reservation.ReservationSearchService;
 import com.example.cliqueres.service.reservation.ReservationService;
 import com.example.cliqueres.service.reservation.dto.ReservationPersistCommand;
+import com.example.cliqueres.service.search.gql.GqlSearchFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ReservationController {
   private final ReservationService reservationService;
+  private final ReservationSearchService reservationSearchService;
   private final ConversionService conversionService;
 
   @PostMapping("/save")
@@ -60,6 +65,21 @@ public class ReservationController {
         .filter(Objects::nonNull)
         .toList();
     return ResponseEntity.ok(convertedResult);
+  }
+
+  @PostMapping("/search")
+  public PageResponse<ReservationOut> search(@RequestBody GqlSearchFilter filter) {
+    final var result = reservationSearchService.searchReservation(filter);
+    final var searchedReservations = result.getContent().stream()
+        .map(dto -> conversionService.convert(dto, ReservationOut.class))
+        .toList();
+    final var response = PageResponse
+        .<ReservationOut>builder()
+        .pageMetadata(result)
+        .elements(searchedReservations)
+        .build();
+
+    return response;
   }
 
 }

@@ -1,6 +1,6 @@
 package com.example.cliqueres.service.event.dto.validator;
 
-import com.example.cliqueres.repository.EventRepository;
+import com.example.cliqueres.repository.event.EventRepository;
 import com.example.cliqueres.service.event.dto.EventPersistCommand;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

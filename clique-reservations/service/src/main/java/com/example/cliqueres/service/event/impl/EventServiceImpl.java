@@ -1,7 +1,7 @@
 package com.example.cliqueres.service.event.impl;
 
 import com.example.cliqueres.domain.Event;
-import com.example.cliqueres.repository.EventRepository;
+import com.example.cliqueres.repository.event.EventRepository;
 import com.example.cliqueres.service.event.EventService;
 import com.example.cliqueres.service.event.dto.EventDto;
 import com.example.cliqueres.service.event.dto.EventPersistCommand;
