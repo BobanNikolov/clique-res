@@ -10,6 +10,8 @@ import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,16 @@ public class UserAccountServiceImpl implements UserAccountService {
     return conversionService.convert(result, UserAccountDto.class);
   }
 
+  @Override
+  public Long countUsers() {
+    return repository.count();
+  }
+
+  public UserDetailsService userDetailsService() {
+    return username -> repository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+  }
+
   private UserAccount convert(UserAccountPersistCommand source) {
     if (source == null) {
       return null;
@@ -45,6 +57,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         .firstName(source.getFirstName())
         .lastName(source.getLastName())
         .displayName(source.getFirstName() + " " + source.getLastName())
+        .role(source.getRole())
         .build();
   }
 }
