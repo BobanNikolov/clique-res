@@ -216,11 +216,11 @@ public abstract class AbstractExtendedSearchRepository<E> implements ExtendedSea
             final var stringExpression = (Expression<String>) orderBase;
             if (o.isDesc()) {
               return cb.desc(
-                  cb.function("workflowtool.naturalsort", String.class,
+                  cb.function("clique_res.naturalsort", String.class,
                       cb.lower(stringExpression)));
             } else {
               return cb.asc(
-                  cb.function("workflowtool.naturalsort", String.class,
+                  cb.function("clique_res.naturalsort", String.class,
                       cb.lower(stringExpression)));
             }
           }
