@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <data-sources>
+        <script-data-source name="Reservations Data Source" id="4"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Reservations Data Set" id="5">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">NAME_RES</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">FIRST_CHARACTER_NAME_OF_RES</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">NAME_RES</property>
+                </structure>
+                <structure>
+                    <property name="columnName">FIRST_CHARACTER_NAME_OF_RES</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">NAME_RES</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">FIRST_CHARACTER_NAME_OF_RES</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Reservations Data Source</property>
+            <method name="open"><![CDATA[reservationCounter=0;]]></method>
+            <method name="fetch"><![CDATA[if (reservationCounter<reportContext.getAppContext().get("reservations").length) {
+	reservation = reportContext.getAppContext().get("reservations")[reservationCounter];
+	row["NAME_RES"] = reservation.getNameOfReservation();
+	row["FIRST_CHARACTER_NAME_OF_RES"] = reservation.getFirstCharacterNameOfReservation();
+	reservationCounter++;
+	return true;
+}
+return false;]]></method>
+        </script-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <table id="44">
+            <property name="dataSet">Reservations Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">FIRST_CHARACTER_NAME_OF_RES</property>
+                    <text-property name="displayName">FIRST_CHARACTER_NAME_OF_RES</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NAME_RES</property>
+                    <expression name="expression" type="javascript">dataSetRow["NAME_RES"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="58"/>
+            <group id="60">
+                <property name="groupName">ReservationGroup</property>
+                <expression name="keyExpr" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="61">
+                        <property name="backgroundColor">white</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="textAlign">center</property>
+                        <cell id="62">
+                            <data id="67">
+                                <property name="resultSetColumn">FIRST_CHARACTER_NAME_OF_RES</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="64">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <cell id="65">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">medium</property>
+                            <table id="71">
+                                <property name="dataSet">Reservations Data Set</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">NAME_RES</property>
+                                        <text-property name="displayName">NAME_RES</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["NAME_RES"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <column id="80"/>
+                                <detail>
+                                    <row id="75">
+                                        <cell id="76">
+                                            <data id="77">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="textAlign">center</property>
+                                                <property name="resultSetColumn">NAME_RES</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                </detail>
+                            </table>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+        </table>
+    </body>
+</report>
