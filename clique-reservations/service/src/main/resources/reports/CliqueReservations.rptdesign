@@ -61,6 +61,9 @@ return false;]]></method>
     </page-setup>
     <body>
         <table id="44">
+            <property name="fontFamily">"Times New Roman CYR"</property>
+            <property name="whiteSpace">pre</property>
+            <property name="canShrink">false</property>
             <property name="dataSet">Reservations Data Set</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -69,11 +72,13 @@ return false;]]></method>
                     <expression name="expression" type="javascript">dataSetRow["FIRST_CHARACTER_NAME_OF_RES"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+            </list-property>
+            <list-property name="sort">
                 <structure>
-                    <property name="name">NAME_RES</property>
-                    <expression name="expression" type="javascript">dataSetRow["NAME_RES"]</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
+                    <expression name="key" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                    <property name="direction">desc</property>
+                    <property name="strength">0</property>
+                    <property name="locale">mk_MK</property>
                 </structure>
             </list-property>
             <column id="58"/>
@@ -84,21 +89,44 @@ return false;]]></method>
                     <expression name="expressionValue" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
                 </structure>
                 <property name="hideDetail">false</property>
+                <list-property name="sort">
+                    <structure>
+                        <expression name="key" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                        <property name="direction">asc</property>
+                        <property name="strength">0</property>
+                        <property name="locale">mk</property>
+                    </structure>
+                </list-property>
                 <header>
                     <row id="61">
                         <property name="backgroundColor">white</property>
                         <property name="fontWeight">bold</property>
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
                         <property name="textAlign">center</property>
                         <cell id="62">
+                            <property name="diagonalStyle">none</property>
+                            <property name="antidiagonalStyle">none</property>
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
                             <data id="67">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <structure name="stringFormat">
+                                    <property name="category">Unformatted</property>
+                                    <property name="locale">mk</property>
+                                </structure>
+                                <property name="whiteSpace">nowrap</property>
                                 <property name="resultSetColumn">FIRST_CHARACTER_NAME_OF_RES</property>
                             </data>
                         </cell>
@@ -111,15 +139,8 @@ return false;]]></method>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                         <cell id="65">
-                            <property name="borderBottomStyle">solid</property>
-                            <property name="borderBottomWidth">medium</property>
-                            <property name="borderLeftStyle">solid</property>
-                            <property name="borderLeftWidth">medium</property>
-                            <property name="borderRightStyle">solid</property>
-                            <property name="borderRightWidth">medium</property>
-                            <property name="borderTopStyle">solid</property>
-                            <property name="borderTopWidth">medium</property>
                             <table id="71">
+                                <property name="width">7.9in</property>
                                 <property name="dataSet">Reservations Data Set</property>
                                 <list-property name="boundDataColumns">
                                     <structure>
@@ -128,16 +149,55 @@ return false;]]></method>
                                         <expression name="expression" type="javascript">dataSetRow["NAME_RES"]</expression>
                                         <property name="dataType">string</property>
                                     </structure>
+                                    <structure>
+                                        <property name="name">FIRST_CHARACTER_NAME_OF_RES</property>
+                                        <text-property name="displayName">FIRST_CHARACTER_NAME_OF_RES</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
                                 </list-property>
-                                <column id="80"/>
+                                <list-property name="filter">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <expression name="expr" type="javascript">row["FIRST_CHARACTER_NAME_OF_RES"]</expression>
+                                        <simple-property-list name="value1">
+                                            <value>row._outer["FIRST_CHARACTER_NAME_OF_RES"]</value>
+                                        </simple-property-list>
+                                        <property name="updateAggregation">true</property>
+                                    </structure>
+                                </list-property>
+                                <column id="80">
+                                    <property name="width">5.366666666666666in</property>
+                                </column>
+                                <column id="84">
+                                    <property name="width">1.5in</property>
+                                </column>
                                 <detail>
                                     <row id="75">
                                         <cell id="76">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
                                             <data id="77">
                                                 <property name="fontWeight">bold</property>
                                                 <property name="textAlign">center</property>
                                                 <property name="resultSetColumn">NAME_RES</property>
                                             </data>
+                                        </cell>
+                                        <cell id="83">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
                                         </cell>
                                     </row>
                                 </detail>
