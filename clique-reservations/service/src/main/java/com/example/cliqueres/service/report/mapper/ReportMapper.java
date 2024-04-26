@@ -2,7 +2,6 @@ package com.example.cliqueres.service.report.mapper;
 
 import com.example.cliqueres.service.report.dto.ReservationReportDto;
 import com.example.cliqueres.service.reservation.dto.ReservationDto;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,7 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -39,6 +39,23 @@ public class ReportMapper {
         reservationReportDtos.add(reservationReportDto);
       }
     }
+    char[] abcCyr = {'А', 'Б', 'В', 'Г', 'Д', 'Ѓ', 'Е', 'Ж', 'З', 'Ѕ', 'И', 'Ј', 'К', 'Л', 'Љ', 'М',
+        'Н', 'Њ', 'О', 'П', 'Р', 'С', 'Т', 'Ќ', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Џ', 'Ш'};
+    final var existingCharsFromAbc = reservationReportDtos.stream()
+        .map(ReservationReportDto::getFirstCharacterNameOfReservation)
+        .collect(Collectors.toSet());
+    var deltaOfAbc = Stream.of(abcCyr).map(Object::toString).collect(Collectors.toSet());
+    deltaOfAbc.removeAll(existingCharsFromAbc);
+
+    deltaOfAbc.forEach(d -> {
+      var reservation = new ReservationReportDto();
+
+      reservation.setFirstCharacterNameOfReservation(d);
+      reservation.setNameOfReservation("");
+
+      reservationReportDtos.add(reservation);
+    });
+
     return reservationReportDtos;
   }
 
@@ -66,7 +83,8 @@ public class ReportMapper {
 
       // Check for multicharacter transliterations first
       for (String key : Arrays.asList("GJ", "ZH", "DZ", "LJ", "NJ", "KJ", "CH", "SH", "DZH")) {
-        if (i + key.length() <= message.length() && message.substring(i, i + key.length()).equals(key)) {
+        if (i + key.length() <= message.length() && message.substring(i, i + key.length())
+            .equals(key)) {
           builder.append(translitMap.get(key));
           i += key.length() - 1; // Move index past the current match
           matchFound = true;
