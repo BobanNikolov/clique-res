@@ -44,8 +44,13 @@ public class ReportMapper {
     final var existingCharsFromAbc = reservationReportDtos.stream()
         .map(ReservationReportDto::getFirstCharacterNameOfReservation)
         .collect(Collectors.toSet());
-    var deltaOfAbc = Stream.of(abcCyr).map(Object::toString).collect(Collectors.toSet());
-    deltaOfAbc.removeAll(existingCharsFromAbc);
+    var deltaOfAbc = new HashSet<String>();
+
+    for (char c : abcCyr) {
+      if (!existingCharsFromAbc.contains(String.valueOf(c))) {
+        deltaOfAbc.add(String.valueOf(c));
+      }
+    }
 
     deltaOfAbc.forEach(d -> {
       var reservation = new ReservationReportDto();
