@@ -87,6 +87,15 @@ public class ReservationServiceImpl implements ReservationService {
         .toList();
   }
 
+  @Override
+  public List<ReservationDto> getAllByEventId(Long eventId) {
+    final var result = repository.findAllByEventId(eventId);
+    return result.stream()
+        .map(it -> conversionService.convert(it, ReservationDto.class))
+        .filter(Objects::nonNull)
+        .toList();
+  }
+
   private Reservation convert(ReservationPersistCommand reservationPersistCommand) {
     if (reservationPersistCommand == null) {
       return null;
