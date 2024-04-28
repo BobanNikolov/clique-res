@@ -1,0 +1,62 @@
+<div>
+    <a [routerLink]="['../signin']">Go to Sign In</a>
+    <mat-card>
+      <mat-card-title>Sign up</mat-card-title>
+  
+      <mat-card-content>
+        <form [formGroup]="signUpForm" (ngSubmit)="register()">
+  
+          <mat-form-field>
+            <input type="email" matInput placeholder="Email" formControlName="email">
+            <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the email 
+             with the .touched check we only display the hints if the input was touched by the users -->
+            <mat-error
+              *ngIf="this.signUpForm.get('email')?.touched && this.signUpForm.get('email')?.hasError('required')">
+              Email is required</mat-error>
+            <mat-error
+              *ngIf="this.signUpForm.get('email')?.touched && this.signUpForm.get('email')?.hasError('email')">
+              Email must be a valid Email</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="username">
+            <mat-error
+              *ngIf="this.signUpForm.get('username')?.touched && this.signUpForm.get('username')?.hasError('required')">
+              Username is required</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" matInput placeholder="First Name" formControlName="firstname">
+            <mat-error
+              *ngIf="this.signUpForm.get('firstname')?.touched && this.signUpForm.get('firstname')?.hasError('required')">
+              First Name is required</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="text" matInput placeholder="Last Name" formControlName="lastname">
+            <mat-error
+              *ngIf="this.signUpForm.get('lastname')?.touched && this.signUpForm.get('lastname')?.hasError('required')">
+              Last Name is required</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+            <mat-error
+              *ngIf="this.signUpForm.get('password')?.touched && this.signUpForm.get('password')?.hasError('required')">
+              Password is required</mat-error>
+          </mat-form-field>
+  
+          <mat-error
+            *ngIf="this.signUpForm.get('passwordConfirm')?.dirty && this.signUpForm.hasError('passwordsNotMatching')">
+            Passwords are not matching!</mat-error>
+  
+          <div class="button">
+            <!-- Button is disabled(not clickable), if our RegisterForm contains Validation Errors -->
+            <button type="submit" mat-button [disabled]="!signUpForm.valid">Sign Up</button>
+          </div>
+  
+        </form>
+      </mat-card-content>
+  
+    </mat-card>
+  </div>
