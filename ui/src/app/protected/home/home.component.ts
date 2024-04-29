@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { LOCALSTORAGE_TOKEN_KEY } from 'src/app/app.module';
+import {LOCALSTORAGE_TOKEN_KEY} from "../../app.module";
 
 @Component({
   selector: 'app-dashboard',

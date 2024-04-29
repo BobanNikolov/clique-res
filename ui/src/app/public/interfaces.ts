@@ -15,7 +15,7 @@ export interface SignUpRequest {
 
 export interface SignInRequest {
     username: string;
-    password: string;  
+    password: string;
 }
 
 export interface JwtAuthenticationToken{

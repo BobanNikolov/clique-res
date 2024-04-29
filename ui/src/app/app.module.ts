@@ -18,10 +18,8 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
+    AppComponent,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -38,6 +36,5 @@ export function tokenGetter() {
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

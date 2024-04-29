@@ -1,8 +1,34 @@
-<p>Protected Dashboard works.</p>
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
 
-<a [routerLink]="['../../public/login']">Go back to Login</a>
-<br>
-<a [routerLink]="['../../public/register']">Go back to Register</a>
-<br>
-<br>
-<button mat-raised-button (click)="logout()">Logout (remove token from localstorage)</button>
+mat-card {
+  max-width: 600px;
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+
+    form {
+      .mat-form-field {
+        width: 100%;
+        min-width: 300px;
+      }
+
+      .error {
+        padding: 16px;
+        width: 300px;
+        color: white;
+        background-color: red;
+      }
+
+      .button {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
